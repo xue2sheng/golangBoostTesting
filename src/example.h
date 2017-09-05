@@ -2,8 +2,7 @@
 extern "C" {
 #endif
 
-#include <cstddef>
-double mean(int* list, size_t list_size);
+bool read_logged_currencies(const char* const input = nullptr);
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,3 @@
-cmake_minimum_required(VERSION 3.0)
-
-project(example C CXX)
-
 # Find source files
 file(GLOB SOURCES *.cpp)
 

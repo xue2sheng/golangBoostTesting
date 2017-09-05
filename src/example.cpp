@@ -1,12 +1,9 @@
 #include "example.h"
-#include <numeric>
-#include <vector>
 #include <iostream>
 
-double mean(int* list, size_t list_size)
+bool read_logged_currencies(const char* const input) 
 {
-	if(list == nullptr) { return 0; }
-	if(list_size == 0) { return 0; }
+	if(not input) { return false; }
 
-	return std::accumulate(list, list + list_size, 0.0) / list_size;
+	return true;
 }
