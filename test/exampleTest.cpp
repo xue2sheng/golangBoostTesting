@@ -3,6 +3,7 @@
 
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test.hpp>
+#include "example.h"
 
 static constexpr char XML_INPUT[] {R"(
 <?xml version="1.0" encoding="UTF-8"?>
@@ -54,7 +55,13 @@ static constexpr char JSON_INPUT[] {R"(
 )"};
 
 BOOST_AUTO_TEST_CASE( test000 ) {	
-   BOOST_TEST_MESSAGE( "\ntest000: example" );
+   BOOST_TEST_MESSAGE( "\ntest000: XML" );
 
-   BOOST_CHECK( true );
+   BOOST_CHECK( read_logged_currencies(XML_INPUT) );
+}
+
+BOOST_AUTO_TEST_CASE( test001 ) {
+   BOOST_TEST_MESSAGE( "\ntest001: JSON" );
+
+   BOOST_CHECK( read_logged_currencies(JSON_INPUT) );
 }
