@@ -1,11 +1,10 @@
-#ifdef __cplusplus
-extern "C" {
-#endif
+#pragma once
+#include <string>
+#include <map>
 
-bool read_logged_currencies(const char* const input = nullptr);
+using Currencies = std::map<std::string, float>;
 
-#ifdef __cplusplus
-}
-#endif
+bool read_logged_currencies(const std::string& input, Currencies& currencies);
+
 
 

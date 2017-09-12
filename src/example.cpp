@@ -1,10 +1,35 @@
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/xml_parser.hpp>
 #include "example.h"
+
+// debug
 #include <iostream>
 
-bool read_logged_currencies(const char* const input) 
+bool read_logged_currencies(const std::string& input, Currencies& currencies)
 {
-	if(not input) { return false; }
+    if(input.empty()) { return false; }
+
+        boost::property_tree::ptree pt;
+        std::istringstream is(input);
+
+        try {
+            boost::property_tree::json_parser::read_json(is, pt);
+            currencies.clear();
+            for( const auto& rate : pt.get_child("rates") ) {
+                 currencies.insert(Currencies::value_type{rate.first, rate.second.get_value<float>()});
+            }
+
+        } catch( const boost::property_tree::json_parser::json_parser_error& e) {
+            try {
+                boost::property_tree::xml_parser::read_xml(is, pt);
+                currencies.clear();
+
+            } catch( const boost::property_tree::json_parser::json_parser_error& e) {
+                return false;
+            }
+        }
 
 
-	return true;
+        return true;
 }
