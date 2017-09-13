@@ -26,19 +26,23 @@ bool read_logged_currencies(const std::string& input, Currencies& currencies)
                 currencies.clear();
 				std::string currency;
 				float rate;
-				for( const auto& item : pt.get_child("gesmes:Envelope.Cube.Cube.Cube.<xmlattr>") ) {
-					if( item.first == "currency" ) { currency = item.second.data(); }
-					if( item.first == "rate" ) { rate = std::stod(item.second.data()); }
-				}
-				if( not currency.empty() ) {
-					currencies.insert(Currencies::value_type{currency, rate});
+
+				for( const auto& elem : pt.get_child("gesmes:Envelope.Cube.Cube") ) {
+					if( elem.first == "Cube") {
+						for( const auto& i : elem.second.get_child("<xmlattr>") ) {
+							if( i.first == "currency" ) { currency = i.second.data(); }
+							if( i.first == "rate" ) { rate = std::stod(i.second.data()); }
+						}
+						if( not currency.empty() ) {
+							currencies.insert(Currencies::value_type{currency, rate});
+						}
+					}
 				}
 
 			} catch( const boost::property_tree::xml_parser::xml_parser_error& e) {
                 return false;
             }
         }
-
 
         return true;
 }
