@@ -62,6 +62,12 @@ BOOST_AUTO_TEST_CASE( test000 ) {
    BOOST_CHECK( currencies.size() > 0 );
    BOOST_TEST_MESSAGE( "Currencies processed: " << currencies.size() );
 
+   BOOST_CHECK( currencies.count("USD") > 0 );
+   if( currencies.count("USD") > 0 ) {
+	   BOOST_TEST_MESSAGE( "USD fake rate: " << currencies["USD"] );
+	   BOOST_CHECK( std::abs( currencies["USD"] - 1.1905 ) < 0.00001 );
+   }
+
 }
 
 BOOST_AUTO_TEST_CASE( test001 ) {
@@ -74,6 +80,7 @@ BOOST_AUTO_TEST_CASE( test001 ) {
 
    BOOST_CHECK( currencies.count("USD") > 0 );
    if( currencies.count("USD") > 0 ) {
-       BOOST_CHECK( std::abs( currencies["USD"] - 1.1905 ) < 0.00001 );
+	   BOOST_TEST_MESSAGE( "USD fake rate: " << currencies["USD"] );
+	   BOOST_CHECK( std::abs( currencies["USD"] - 1.1905 ) < 0.00001 );
    }
 }
