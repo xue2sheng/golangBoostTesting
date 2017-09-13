@@ -67,7 +67,6 @@ BOOST_AUTO_TEST_CASE( test000 ) {
 	   BOOST_TEST_MESSAGE( "USD fake rate: " << currencies["USD"] );
 	   BOOST_CHECK( std::abs( currencies["USD"] - 1.1905 ) < 0.00001 );
    }
-
 }
 
 BOOST_AUTO_TEST_CASE( test001 ) {
